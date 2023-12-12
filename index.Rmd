@@ -11,4 +11,18 @@ output:
 
 ## Project thoughts
 
-I am interested in exploring data related to how Supreme Court decisions relate to shifts in public opinion on particularly controversial and partisan matters such as abortion and gun control. 
+Much pro-life rhetoric in the abortion debate surrounds the idea that abortion is the murder of an unborn child. What is the relationship between anti-abortion attitudes and "pro-life" attitudes on other issues centered around murder such as the death penalty and gun control? Is this pro-life attitude consistent among these other issues?
+
+```{r}
+library(tidyverse)
+dataset <- read_csv("anes2020.csv") |>
+  select(V201342x, V201345x, V202344x, V201350, V201231x) |>
+  rename(
+    abortion = V201342x,
+    deathpenalty = V201345x,
+    guncontrol = V202344x,
+    internationalforce = V201350,
+    partyid = V201231x
+  )
+ colnames(dataset)
+```
