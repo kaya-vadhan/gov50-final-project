@@ -7,7 +7,7 @@ output:
     self_contained: false
 ---
 
-## Section 1
+## Background
 
 Background
 
@@ -16,6 +16,8 @@ Much pro-life rhetoric in the abortion debate surrounds the idea that abortion i
 Hypotheses
 
 I hypothesize that these attitudes will not be consistent because anti-death penalty, pro-gun control, and anti-military force attitudes are traditionally Democratic ideologies, whereas pro-life abortion attitudes are often Republican ideologies, suggesting some form of inconsistency. If this hypothesis is true, this would bring into question the underlying foundation of the pro-life anti-abortion argument and suggest that it is just a rhetoric, platform, or caused by other factors such as partisanship. As such, I will also be measuring the correlation between partisan self-identification and abortion attitudes. As abortion is seen as a very partisan issue, I do believe that there will be a strong correlation here.   
+
+## Data
 
 Data
 
@@ -32,8 +34,34 @@ Survey question: Would you be pleased, upset, or neither pleased nor upset if th
 6. Moderately upset
 7. Extremely upset
 
+```{r}
+library(tidyverse)
+library(ggplot2)
+dataset <- read_csv("anes2020.csv") |>
+  select(V201342x, V201345x, V202344x, V201350, V201200) |>
+  rename(
+    abortion = V201342x,
+    deathpenalty = V201345x,
+    guncontrol = V202344x,
+    militaryforce = V201350,
+    ideology = V201200
+  )
+dataset <- dataset |>
+  filter(deathpenalty > 0, guncontrol > 0, abortion > 0, militaryforce > 0, ideology > 0, ideology < 10)
+head(dataset)
+ 
+dataset |>
+  ggplot(mapping = aes(x = abortion)) +
+  geom_bar() +
+  labs(
+x = "Degree of Upsetness at a Potential Reduction of Abortion Rights",
+y = "Respondent Count",
+title = "Respondent Perspective on Abortion Rights"
+)
+```
+
 [EDITS HERE EDITS HERE EDITS HERE] 
-It is important to note that scoring highly on the outcome variable would imply a pro-choice attitude (anti-pro-life attitude), not pro-life attitude. For that reason, when analyzing the data _____. 
+It is important to note that scoring highly on the outcome variable would imply a pro-choice attitude (anti-pro-life attitude), not pro-life attitude. For that reason, when analyzing the data _____. Further, we can see that the majority of respondents would be extremely upset at the reduction of abortion rights or are indifferent on the matter. 
 
 
 Explanatory variables and measurement:
@@ -87,25 +115,9 @@ EDIT
 EDIT
 significant negative correlation between these variables would support my hypothesis that pro-life attitudes are not consistent between abortion and other issues. A significant negative correlation between degree of conservatism and favoring of abortion rights would further support my hypothesis that the pro-life argument for abortion is not based in values, but instead a partisan identification or political argument. However, if these correlations were to be swapped, this would suggest that pro-life attitudes are consistent among many political issues, and that the pro-life abortion argument is a true value, not just political rhetoric.
 
-=
-```{r}
-library(tidyverse)
-library(ggplot2)
-dataset <- read_csv("anes2020.csv") |>
-  select(V201342x, V201345x, V202344x, V201350, V201200) |>
-  rename(
-    abortion = V201342x,
-    deathpenalty = V201345x,
-    guncontrol = V202344x,
-    militaryforce = V201350,
-    ideology = V201200
-  )
-dataset <- dataset |>
-  filter(deathpenalty > 0, guncontrol > 0, abortion > 0, militaryforce > 0, ideology > 0, ideology < 10)
-head(dataset)
- 
-##Milestone 3 Graphic
+## Results
 
+```{r}
 ggplot(dataset, aes(x = deathpenalty, y = abortion)) +
 geom_jitter() + geom_smooth(method = "lm", se = FALSE) +
 labs(
@@ -138,7 +150,7 @@ y = "Abortion Reduction Favorability",
 title = "Pro-Choice vs Pro-Assault Rifles"
 )
 
-## Milestone 4: Regression
+## Regression
 regression <- lm(abortion ~ deathpenalty + militaryforce,
                         data = dataset)
 summary(regression)
