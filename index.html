@@ -115,7 +115,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   <!--/radix_placeholder_rmarkdown_metadata-->
   
   <script type="text/json" id="radix-resource-manifest">
-  {"type":"character","attributes":{},"value":["anes2020.csv","index_files/anchor-4.2.2/anchor.min.js","index_files/bowser-1.9.3/bowser.min.js","index_files/distill-2.2.21/template.v2.js","index_files/figure-html5/unnamed-chunk-1-1.png","index_files/figure-html5/unnamed-chunk-1-2.png","index_files/figure-html5/unnamed-chunk-1-3.png","index_files/figure-html5/unnamed-chunk-1-4.png","index_files/figure-html5/unnamed-chunk-2-1.png","index_files/figure-html5/unnamed-chunk-2-2.png","index_files/figure-html5/unnamed-chunk-2-3.png","index_files/figure-html5/unnamed-chunk-2-4.png","index_files/header-attrs-2.17/header-attrs.js","index_files/header-attrs-2.24/header-attrs.js","index_files/jquery-3.6.0/jquery-3.6.0.js","index_files/jquery-3.6.0/jquery-3.6.0.min.js","index_files/jquery-3.6.0/jquery-3.6.0.min.map","index_files/kePrint-0.0.1/kePrint.js","index_files/lightable-0.0.1/lightable.css","index_files/popper-2.6.0/popper.min.js","index_files/tippy-6.2.7/tippy-bundle.umd.min.js","index_files/tippy-6.2.7/tippy-light-border.css","index_files/tippy-6.2.7/tippy.css","index_files/tippy-6.2.7/tippy.umd.min.js","index_files/webcomponents-2.0.0/webcomponents.js"]}
+  {"type":"character","attributes":{},"value":["anes2020.csv","index_files/anchor-4.2.2/anchor.min.js","index_files/bowser-1.9.3/bowser.min.js","index_files/distill-2.2.21/template.v2.js","index_files/figure-html5/unnamed-chunk-1-1.png","index_files/figure-html5/unnamed-chunk-1-2.png","index_files/figure-html5/unnamed-chunk-1-3.png","index_files/figure-html5/unnamed-chunk-1-4.png","index_files/figure-html5/unnamed-chunk-2-1.png","index_files/figure-html5/unnamed-chunk-2-2.png","index_files/figure-html5/unnamed-chunk-2-3.png","index_files/figure-html5/unnamed-chunk-2-4.png","index_files/figure-html5/unnamed-chunk-3-1.png","index_files/figure-html5/unnamed-chunk-4-1.png","index_files/header-attrs-2.17/header-attrs.js","index_files/header-attrs-2.24/header-attrs.js","index_files/jquery-3.6.0/jquery-3.6.0.js","index_files/jquery-3.6.0/jquery-3.6.0.min.js","index_files/jquery-3.6.0/jquery-3.6.0.min.map","index_files/kePrint-0.0.1/kePrint.js","index_files/lightable-0.0.1/lightable.css","index_files/popper-2.6.0/popper.min.js","index_files/tippy-6.2.7/tippy-bundle.umd.min.js","index_files/tippy-6.2.7/tippy-light-border.css","index_files/tippy-6.2.7/tippy.css","index_files/tippy-6.2.7/tippy.umd.min.js","index_files/webcomponents-2.0.0/webcomponents.js"]}
   </script>
   <!--radix_placeholder_navigation_in_header-->
   <!--/radix_placeholder_navigation_in_header-->
@@ -1520,12 +1520,10 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 
 <div class="d-article">
 <h2 id="background">Background</h2>
-<p>Background</p>
 <p>Much pro-life rhetoric in the abortion debate surrounds the idea that abortion is the murder of an unborn child. Broadly, I would like to examine whether this pro-life abortion attitude is truly value-based, or whether it is specific to abortion and may be influenced or caused by other factors (such as partisanship). In this study, I will specifically look at the relationship between anti-abortion beliefs and beliefs on other political issues relating to murder. Opposition to the death-penalty should also fall under a pro-life attitude. Favoring bans on semi-automatic assault rifles, which have contributed to extreme numbers of deaths and shootings, should also fall under a pro-life attitude. Lastly, opposing an eagerness to use military force in international conflict should fall under an pro-life attitude, considering the thousands of civilian deaths resulting from an arguably excessive use of military force. Converse opinions on these topics would seemingly conflict with a pro-life value. By assessing consistency in pro-life sentiments across abortion, ideally, we will gain insight into whether being pro-life is a true value of individuals, or solely an abortion rhetoric.</p>
 <p>Hypotheses</p>
 <p>I hypothesize that these attitudes will not be consistent because anti-death penalty, pro-gun control, and anti-military force attitudes are traditionally Democratic ideologies, whereas pro-life abortion attitudes are often Republican ideologies, suggesting some form of inconsistency. If this hypothesis is true, this would bring into question the underlying foundation of the pro-life anti-abortion argument and suggest that it is just a rhetoric, platform, or caused by other factors such as partisanship. As such, I will also be measuring the correlation between partisan self-identification and abortion attitudes. As abortion is seen as a very partisan issue, I do believe that there will be a strong correlation here.</p>
 <h2 id="data">Data</h2>
-<p>Data</p>
 <p>My data is from the American Election Studies Data Center. The specific sample is from a 2020 data collection of 8280 individuals. The survey results for the variables I am looking at were done on a Likert scale.</p>
 <p>Outcome variable and measurement: Favoring of abortion rights (anti-pro-life attitude)</p>
 <p>Survey question: Would you be pleased, upset, or neither pleased nor upset if the Supreme Court reduced abortion rights? [pro-choice]
@@ -1627,6 +1625,7 @@ EDIT
 EDIT
 significant negative correlation between these variables would support my hypothesis that pro-life attitudes are not consistent between abortion and other issues. A significant negative correlation between degree of conservatism and favoring of abortion rights would further support my hypothesis that the pro-life argument for abortion is not based in values, but instead a partisan identification or political argument. However, if these correlations were to be swapped, this would suggest that pro-life attitudes are consistent among many political issues, and that the pro-life abortion argument is a true value, not just political rhetoric.</p>
 <h2 id="results">Results</h2>
+##Death Penalty and Military Force
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://modelsummary.com'>modelsummary</a></span><span class='op'>)</span></span>
@@ -1673,6 +1672,10 @@ Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&
 Residual standard error: 2.039 on 6200 degrees of freedom
 Multiple R-squared:  0.08472,   Adjusted R-squared:  0.08442 
 F-statistic: 286.9 on 2 and 6200 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+<p>Add description</p>
+#Gun Control
+<div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='va'>dataset</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>guncontrol</span>, y <span class='op'>=</span> <span class='va'>abortion</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span></span>
 <span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_jitter.html'>geom_jitter</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_smooth.html'>geom_smooth</a></span><span class='op'>(</span>method <span class='op'>=</span> <span class='st'>"lm"</span>, se <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>+</span></span>
@@ -1682,7 +1685,7 @@ F-statistic: 286.9 on 2 and 6200 DF,  p-value: &lt; 2.2e-16</code></pre>
 <span>title <span class='op'>=</span> <span class='st'>"Abortion Attitudes vs Assault Rifle Attitudes"</span></span>
 <span><span class='op'>)</span></span></code></pre>
 </div>
-<img src="index_files/figure-html5/unnamed-chunk-2-3.png" width="624" />
+<img src="index_files/figure-html5/unnamed-chunk-3-1.png" width="624" />
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>gunsregression</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>abortion</span> <span class='op'>~</span> <span class='va'>guncontrol</span>, data <span class='op'>=</span> <span class='va'>dataset</span><span class='op'>)</span></span>
 <span><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='va'>gunsregression</span><span class='op'>)</span></span></code></pre>
@@ -1705,8 +1708,13 @@ Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&
 Residual standard error: 1.998 on 6201 degrees of freedom
 Multiple R-squared:  0.1211,    Adjusted R-squared:  0.121 
 F-statistic: 854.7 on 1 and 6201 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+<p>Description</p>
+#Ideology
+<div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='va'>dataset</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>ideology</span>, y <span class='op'>=</span> <span class='va'>abortion</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span></span>
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='co'>##ideology</span></span>
+<span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='va'>dataset</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>ideology</span>, y <span class='op'>=</span> <span class='va'>abortion</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span></span>
 <span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_jitter.html'>geom_jitter</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_smooth.html'>geom_smooth</a></span><span class='op'>(</span>method <span class='op'>=</span> <span class='st'>"lm"</span>, se <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>+</span></span>
 <span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>labs</a></span><span class='op'>(</span></span>
 <span>x <span class='op'>=</span> <span class='st'>"Liberal-Conservative Identification Scale"</span>,</span>
@@ -1714,7 +1722,7 @@ F-statistic: 854.7 on 1 and 6201 DF,  p-value: &lt; 2.2e-16</code></pre>
 <span>title <span class='op'>=</span> <span class='st'>"Abortion Attitudes vs Liberal-Conservative Identification"</span></span>
 <span><span class='op'>)</span></span></code></pre>
 </div>
-<img src="index_files/figure-html5/unnamed-chunk-2-4.png" width="624" />
+<img src="index_files/figure-html5/unnamed-chunk-4-1.png" width="624" />
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>ideologyregression</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>abortion</span> <span class='op'>~</span> <span class='va'>ideology</span>, data <span class='op'>=</span> <span class='va'>dataset</span><span class='op'>)</span></span>
 <span><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='va'>ideologyregression</span><span class='op'>)</span></span></code></pre>
@@ -1737,9 +1745,12 @@ Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&
 Residual standard error: 1.661 on 6201 degrees of freedom
 Multiple R-squared:  0.3929,    Adjusted R-squared:  0.3928 
 F-statistic:  4012 on 1 and 6201 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+<p>Description</p>
+##Model Summary
+<div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span><span class='co'>#MODELSUMMARY</span></span>
-<span><span class='va'>var_labels</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span></span>
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>var_labels</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span></span>
 <span>    <span class='st'>"(Intercept)"</span> <span class='op'>=</span> <span class='st'>"Intercept"</span>,</span>
 <span>    <span class='st'>"abortion"</span> <span class='op'>=</span> <span class='st'>"Pro-Abortion Rights Score"</span>,</span>
 <span>    <span class='st'>"deathpenalty"</span> <span class='op'>=</span> <span class='st'>"Anti-Death Penalty Score"</span>,</span>
@@ -1991,6 +2002,9 @@ R2 Adj.
 </tbody>
 </table>
 </div>
+<p>2-3 paragraphs of description and interpretation of the plots and regression (including interpreting the main coefficient of interest and describing if it is statistically significant and if we should interpret it causally). This section could be longer if you choose to include additional analyses.</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>Each of the explanatory variables we tested showed extremely statistically significant correlations with abortion attitudes. As I hypothesized, each case, the “pro-life” attitude on each topic (pro-banning of assault rifles, anti-death penalty, anti-use of military force) as inversely associated with a “pro-life” abortion attitude (anti-abortion). Further, pro-life abortion attitudes were strongly correlated with high levels of conservatism, as expected. This study provides significant evidence to support the hypothesis that the anti-abortion “pro-life” argument is not a true internal value, but could be simply political propaganda and rhetoric. However, there are still limitations to this inference. Treating likert-scale results as a continuous variable and running a linear regression on them is not the most precise or ideal, and if we learned how to run other forms of regression and more statistical tests in this class, those may have been better to be used. Further, individuals may have pro-life values but multiple competing values that arise in these cases of the death penalty (in this case, the person being killed has already committed heinous crimes), use of international military force (in this case, there may be threat to the individual’s life themselves), and gun control (in this case, there is the frequently discussed competing constitutional right to bear arms of the second amendment). So, it may not be that being “pro-life” is solely abortion rhetoric, but that in other cases, other values end up being weighed as more important. Lastly, extrapolating data from one survey with only a few questions asked about each of these issues can make it hard to gain actual perspective on the attitudes of respondents. Issues like question framing may create biases in our results. With more time and money, ideally, surveys would dive deep into each of these issues, asking similar questions in multiple different forms and asking specific nuanced questions that help tease out the underlying reasoning behind each of their attitudes. Overall, though, this study provides a great evidence for continued research on this topic.</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
