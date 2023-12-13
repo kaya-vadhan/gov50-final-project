@@ -114,6 +114,7 @@ significant negative correlation between these variables would support my hypoth
 ## Results
 
 Death Penalty and Military Force
+
 ```{r}
 library(modelsummary)
 
@@ -153,6 +154,7 @@ summary(gunsregression)
 Description
 
 Ideology
+
 ```{r}
 ##ideology
 ggplot(dataset, aes(x = ideology, y = abortion)) +
@@ -167,7 +169,8 @@ summary(ideologyregression)
 ```
 Description
 
-##Model Summary
+Model Summary
+
 ```{r}
 var_labels <- c(
     "(Intercept)" = "Intercept",
