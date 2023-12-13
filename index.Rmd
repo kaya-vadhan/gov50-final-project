@@ -118,20 +118,14 @@ significant negative correlation between these variables would support my hypoth
 ## Results
 
 ```{r}
+library(modelsummary)
+
 ggplot(dataset, aes(x = deathpenalty, y = abortion)) +
 geom_jitter() + geom_smooth(method = "lm", se = FALSE) +
 labs(
 x = "Death Penalty Unavorability",
 y = "Abortion Reduction Favorability",
-title = "Pro-Choice vs Anti-Death Penalty"
-)
-
-ggplot(dataset, aes(x = guncontrol, y = abortion)) +
-geom_jitter() + geom_smooth(method = "lm", se = FALSE) +
-labs(
-x = "Assault Rifle Bans Favorability",
-y = "Abortion Reduction Favorability",
-title = "Pro-Choice vs Pro-Assault Rifles"
+title = "Abortion Attitudes vs Death Penality Attitudes"
 )
 
 ggplot(dataset, aes(x = militaryforce, y = abortion)) +
@@ -139,26 +133,45 @@ geom_jitter() + geom_smooth(method = "lm", se = FALSE) +
 labs(
 x = "Military Force Unfavorability",
 y = "Abortion Reduction Favorability",
-title = "Pro-Choice vs Anti-Military Force"
+title = "Abortion Attitudes vs Military Force Attitudes"
 )
+
+regression <- lm(abortion ~ deathpenalty + militaryforce, data = dataset)
+summary(regression)
+
+ggplot(dataset, aes(x = guncontrol, y = abortion)) +
+geom_jitter() + geom_smooth(method = "lm", se = FALSE) +
+labs(
+x = "Anti-Assault Rifle Bans Scale",
+y = "Pro-Abortion Reduction Scale",
+title = "Abortion Attitudes vs Assault Rifle Attitudes"
+)
+gunsregression <- lm(abortion ~ guncontrol, data = dataset)
+summary(gunsregression)
 
 ggplot(dataset, aes(x = ideology, y = abortion)) +
 geom_jitter() + geom_smooth(method = "lm", se = FALSE) +
 labs(
-x = "Conservative Identification",
-y = "Abortion Reduction Favorability",
-title = "Pro-Choice vs Pro-Assault Rifles"
+x = "Liberal-Conservative Identification Scale",
+y = "Anti-Abortion Scale",
+title = "Abortion Attitudes vs Liberal-Conservative Identification"
 )
-
-## Regression
-regression <- lm(abortion ~ deathpenalty + militaryforce,
-                        data = dataset)
-summary(regression)
-
-gunsregression <- lm(abortion ~ guncontrol,
-                        data = dataset)
-summary(gunsregression)
-
 ideologyregression <- lm(abortion ~ ideology, data = dataset)
 summary(ideologyregression)
+
+#MODELSUMMARY
+var_labels <- c(
+    "(Intercept)" = "Intercept",
+    "abortion" = "Pro-Abortion Rights Score",
+    "deathpenalty" = "Anti-Death Penalty Score",
+    "guncontrol" = "Pro-Assault Rifle Score",
+    "militaryforce" = "Anti-Military Force Score",
+    "ideology" = "Liberal-Conservative Score"
+  )
+modelsummary::modelsummary(list("Death Penalty and Military Force Regression" = regression, "Guns Regression" = gunsregression, "Ideology Identification Regression" = ideologyregression),
+                           statistic = c("s.e. = {std.error}",
+                                         "p = {p.value}"),
+                           coef_map = var_labels,
+                           gof_map = c("nobs", "r.squared", "adj.r.squared"))
+
 ```
