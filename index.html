@@ -1525,15 +1525,18 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <p>I hypothesize that these attitudes will not be consistent because anti-death penalty, pro-gun control, and anti-military force attitudes are traditionally Democratic ideologies, whereas pro-life abortion attitudes are often Republican ideologies, suggesting some form of inconsistency. If this hypothesis is true, this would bring into question the underlying foundation of the pro-life anti-abortion argument and suggest that it is just a rhetoric, platform, or caused by other factors such as partisanship. As such, I will also be measuring the correlation between partisan self-identification and abortion attitudes. As abortion is seen as a very partisan issue, I do believe that there will be a strong correlation here.</p>
 <h2 id="data">Data</h2>
 <p>My data is from the American Election Studies Data Center. The specific sample is from a 2020 data collection of 8280 individuals. The survey results for the variables I am looking at were done on a Likert scale.</p>
-<p>Outcome variable and measurement: Favoring of abortion rights (anti-pro-life attitude)</p>
-<p>Survey question: Would you be pleased, upset, or neither pleased nor upset if the Supreme Court reduced abortion rights? [pro-choice]
-1. Extremely pleased
-2. Moderately pleased
-3. A little pleased
-4. Neither pleased nor upset
-5. A little upset
-6. Moderately upset
-7. Extremely upset</p>
+<p>OUTCOME VARIABLE AND MEASUREMENT</p>
+<p>Opposition to Abortion Rights Reduction: “Pro Abortion Rights Score” (anti pro-life attitude)</p>
+<p>Survey question: Would you be pleased, upset, or neither pleased nor upset if the Supreme Court reduced abortion rights?</p>
+<ol type="1">
+<li>Extremely pleased</li>
+<li>Moderately pleased</li>
+<li>A little pleased</li>
+<li>Neither pleased nor upset</li>
+<li>A little upset</li>
+<li>Moderately upset</li>
+<li>Extremely upset</li>
+</ol>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://tidyverse.tidyverse.org'>tidyverse</a></span><span class='op'>)</span></span>
@@ -1545,46 +1548,47 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <span>    deathpenalty <span class='op'>=</span> <span class='va'>V201345x</span>,</span>
 <span>    guncontrol <span class='op'>=</span> <span class='va'>V202344x</span>,</span>
 <span>    militaryforce <span class='op'>=</span> <span class='va'>V201350</span>,</span>
-<span>    ideology <span class='op'>=</span> <span class='va'>V201200</span></span>
+<span>    id <span class='op'>=</span> <span class='va'>V201200</span></span>
 <span>  <span class='op'>)</span></span>
 <span><span class='va'>dataset</span> <span class='op'>&lt;-</span> <span class='va'>dataset</span> <span class='op'>|&gt;</span></span>
-<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>deathpenalty</span> <span class='op'>&gt;</span> <span class='fl'>0</span>, <span class='va'>guncontrol</span> <span class='op'>&gt;</span> <span class='fl'>0</span>, <span class='va'>abortion</span> <span class='op'>&gt;</span> <span class='fl'>0</span>, <span class='va'>militaryforce</span> <span class='op'>&gt;</span> <span class='fl'>0</span>, <span class='va'>ideology</span> <span class='op'>&gt;</span> <span class='fl'>0</span>, <span class='va'>ideology</span> <span class='op'>&lt;</span> <span class='fl'>10</span><span class='op'>)</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>deathpenalty</span> <span class='op'>&gt;</span> <span class='fl'>0</span>, <span class='va'>guncontrol</span> <span class='op'>&gt;</span> <span class='fl'>0</span>, <span class='va'>abortion</span> <span class='op'>&gt;</span> <span class='fl'>0</span>, <span class='va'>militaryforce</span> <span class='op'>&gt;</span> <span class='fl'>0</span>, <span class='va'>id</span> <span class='op'>&gt;</span> <span class='fl'>0</span>, <span class='va'>id</span> <span class='op'>&lt;</span> <span class='fl'>10</span><span class='op'>)</span></span>
 <span><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='va'>dataset</span><span class='op'>)</span></span></code></pre>
 </div>
 <pre><code># A tibble: 6 × 5
-  abortion deathpenalty guncontrol militaryforce ideology
-     &lt;dbl&gt;        &lt;dbl&gt;      &lt;dbl&gt;         &lt;dbl&gt;    &lt;dbl&gt;
-1        2            1          7             3        6
-2        7            1          6             3        4
-3        7            4          1             4        2
-4        4            1          1             2        3
-5        2            2          4             4        5
-6        4            2          1             4        4</code></pre>
+  abortion deathpenalty guncontrol militaryforce    id
+     &lt;dbl&gt;        &lt;dbl&gt;      &lt;dbl&gt;         &lt;dbl&gt; &lt;dbl&gt;
+1        2            1          7             3     6
+2        7            1          6             3     4
+3        7            4          1             4     2
+4        4            1          1             2     3
+5        2            2          4             4     5
+6        4            2          1             4     4</code></pre>
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>dataset</span> <span class='op'>|&gt;</span></span>
 <span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span>mapping <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>abortion</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span></span>
 <span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_bar.html'>geom_bar</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span></span>
 <span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>labs</a></span><span class='op'>(</span></span>
-<span>x <span class='op'>=</span> <span class='st'>"Degree of Upsetness at a Potential Reduction of Abortion Rights"</span>,</span>
+<span>x <span class='op'>=</span> <span class='st'>"Pro Abortion Rights Score"</span>,</span>
 <span>y <span class='op'>=</span> <span class='st'>"Respondent Count"</span>,</span>
 <span>title <span class='op'>=</span> <span class='st'>"Respondent Perspective on Abortion Rights"</span></span>
 <span><span class='op'>)</span></span></code></pre>
 </div>
 <p><img src="index_files/figure-html5/unnamed-chunk-1-1.png" width="624" /></p>
 </div>
-<p>[EDITS HERE EDITS HERE EDITS HERE]
-It is important to note that scoring highly on the outcome variable would imply a pro-choice attitude (anti-pro-life attitude), not pro-life attitude. For that reason, when analyzing the data _____. Further, we can see that the majority of respondents would be extremely upset at the reduction of abortion rights or are indifferent on the matter.</p>
-<p>Explanatory variables and measurement:</p>
+<p>Out of the thousands of respondents, from this graph, wee can see that the majority of respondents would be extremely upset at the reduction of abortion rights or are indifferent on the matter, so they are generally not “pro-lifers”. However, there are still over 1000 respondents that fall on the pro-life half of the spectrum.</p>
+<p>EXPLANATORY VARIABLES AND MEASUREMENT</p>
 <ol type="1">
-<li>Opposition to the Death Penalty (pro-life attitude)</li>
+<li>Opposition to the Death Penalty: “Anti Death Penalty Score” (pro-life attitude)</li>
 </ol>
-<p>Survey question: Do you favor or oppose the death penalty for persons convicted of murder?
-1. Favor strongly
-2. Favor not strongly
-3. Oppose not strongly
-4. Oppose strongly</p>
+<p>Survey question: Do you favor or oppose the death penalty for persons convicted of murder?</p>
+<ol type="1">
+<li>Favor strongly</li>
+<li>Favor not strongly</li>
+<li>Oppose not strongly</li>
+<li>Oppose strongly</li>
+</ol>
 <ol start="2" type="1">
-<li>Opposition to banning assault rifles (anti-pro-life attitude)</li>
+<li>Opposition to banning assault rifles: “Pro Assault Rifles Score” (anti pro-life attitude)</li>
 </ol>
 <p>Survey question: Do you favor, oppose, or neither favor nor oppose banning the sale of semi-automatic “assault-style” rifles?</p>
 <ol type="1">
@@ -1597,35 +1601,31 @@ It is important to note that scoring highly on the outcome variable would imply 
 <li>Oppose a great deal</li>
 </ol>
 <ol start="3" type="1">
-<li>Opposition to using military force in international conflict (pro-life attitude)</li>
+<li>Opposition to using military force in international conflict: “Anti Military Force Score” (pro-life attitude)</li>
 </ol>
-<p>Survey question: How willing should the United States be to use military force to solve international problems?
-1. Extremely willing
-2. Very willing
-3. Moderately willing
-4. A little willing
-5. Not at all willing</p>
+<p>Survey question: How willing should the United States be to use military force to solve international problems?</p>
+<ol type="1">
+<li>Extremely willing</li>
+<li>Very willing</li>
+<li>Moderately willing</li>
+<li>A little willing</li>
+<li>Not at all willing</li>
+</ol>
 <ol start="4" type="1">
-<li>Degree of Conservatism</li>
+<li>Liberal-Conservative Self Identification: “Conservative Identification Score”</li>
 </ol>
-<p>Survey question: Where would you place yourself on this scale [7PT SCALE LIBERAL-CONSERVATIVE]?
-1. Extremely liberal
-2. Liberal
-3. Slightly liberal
-4. Moderate; middle of the road
-5. Slightly conservative
-6. Conservative
-7. Extremely conservative</p>
-<p>Since opposition to the death penalty and opposition to using military force in international conflict are both pro-life attitudes, and favoring of abortion rights is a non-pro-life attitude, a significant positive correlation between these variables would support my hypothesis that pro-life attitudes are not consistent between abortion and other issues. Since ____ EDIT EDIT
-EDIT
-EDIT
-EDIT
-EDIT
-EDIT
-EDIT
-significant negative correlation between these variables would support my hypothesis that pro-life attitudes are not consistent between abortion and other issues. A significant negative correlation between degree of conservatism and favoring of abortion rights would further support my hypothesis that the pro-life argument for abortion is not based in values, but instead a partisan identification or political argument. However, if these correlations were to be swapped, this would suggest that pro-life attitudes are consistent among many political issues, and that the pro-life abortion argument is a true value, not just political rhetoric.</p>
+<p>Survey question: Where would you place yourself on this scale [7PT SCALE LIBERAL-CONSERVATIVE]?</p>
+<ol type="1">
+<li>Extremely liberal</li>
+<li>Liberal</li>
+<li>Slightly liberal</li>
+<li>Moderate; middle of the road</li>
+<li>Slightly conservative</li>
+<li>Conservative</li>
+<li>Extremely conservative</li>
+</ol>
+<p>Since opposition to the death penalty and opposition to using military force in international conflict are both pro-life attitudes, and opposition to abortion rights reduction is an anti pro-life attitude, a significant positive correlation between these variables would support my hypothesis that pro-life attitudes are not consistent between abortion and other issues. Since opposition to banning assault rifles is an anti pro-life attitude, just like opposition to abortion rights reduction, a significant negative correlation here would support my hypothesis that pro-life attitudes are not consistent between abortion and other issues. A significant negative correlation between degree of conservative identification and opposition of abortion right reduction would further support my hypothesis that the pro-life argument for abortion is not based in values, but instead a partisan identification or political argument. However, if there were significant correlations found in the other direction, this would suggest that pro-life attitudes are consistent among many political issues, and that the pro-life abortion argument is a true, consistent value, which I believe would give it more merit, as opposed to just political rhetoric. If we fail to reject the null hypothesis altogether and find no significant correlations, perspectives on these issues may not be related at all (somewhat supporting the hypothesis that pro-life is primarily rhetoric), or that there are a multitude of motivations driving opinions on these topics.</p>
 <h2 id="results">Results</h2>
-<p>Death Penalty and Military Force</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://modelsummary.com'>modelsummary</a></span><span class='op'>)</span></span>
@@ -1633,9 +1633,9 @@ significant negative correlation between these variables would support my hypoth
 <span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='va'>dataset</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>deathpenalty</span>, y <span class='op'>=</span> <span class='va'>abortion</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span></span>
 <span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_jitter.html'>geom_jitter</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_smooth.html'>geom_smooth</a></span><span class='op'>(</span>method <span class='op'>=</span> <span class='st'>"lm"</span>, se <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>+</span></span>
 <span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>labs</a></span><span class='op'>(</span></span>
-<span>x <span class='op'>=</span> <span class='st'>"Death Penalty Unavorability"</span>,</span>
-<span>y <span class='op'>=</span> <span class='st'>"Abortion Reduction Favorability"</span>,</span>
-<span>title <span class='op'>=</span> <span class='st'>"Abortion Attitudes vs Death Penality Attitudes"</span></span>
+<span>x <span class='op'>=</span> <span class='st'>"Anti Death Penalty Scale"</span>,</span>
+<span>y <span class='op'>=</span> <span class='st'>"Pro Abortion Rights Scale"</span>,</span>
+<span>title <span class='op'>=</span> <span class='st'>"Abortion Attitudes vs Death Penalty Attitudes"</span></span>
 <span><span class='op'>)</span></span></code></pre>
 </div>
 <img src="index_files/figure-html5/unnamed-chunk-2-1.png" width="624" />
@@ -1643,93 +1643,69 @@ significant negative correlation between these variables would support my hypoth
 <pre class="sourceCode r"><code class="sourceCode r"><span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='va'>dataset</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>militaryforce</span>, y <span class='op'>=</span> <span class='va'>abortion</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span></span>
 <span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_jitter.html'>geom_jitter</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_smooth.html'>geom_smooth</a></span><span class='op'>(</span>method <span class='op'>=</span> <span class='st'>"lm"</span>, se <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>+</span></span>
 <span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>labs</a></span><span class='op'>(</span></span>
-<span>x <span class='op'>=</span> <span class='st'>"Military Force Unfavorability"</span>,</span>
-<span>y <span class='op'>=</span> <span class='st'>"Abortion Reduction Favorability"</span>,</span>
+<span>x <span class='op'>=</span> <span class='st'>"Anti Military Force Scale"</span>,</span>
+<span>y <span class='op'>=</span> <span class='st'>"Pro Abortion Rights Scale"</span>,</span>
 <span>title <span class='op'>=</span> <span class='st'>"Abortion Attitudes vs Military Force Attitudes"</span></span>
 <span><span class='op'>)</span></span></code></pre>
 </div>
 <img src="index_files/figure-html5/unnamed-chunk-2-2.png" width="624" />
 <div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>regression</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>abortion</span> <span class='op'>~</span> <span class='va'>deathpenalty</span> <span class='op'>+</span> <span class='va'>militaryforce</span>, data <span class='op'>=</span> <span class='va'>dataset</span><span class='op'>)</span></span>
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='va'>dataset</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>guncontrol</span>, y <span class='op'>=</span> <span class='va'>abortion</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_jitter.html'>geom_jitter</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_smooth.html'>geom_smooth</a></span><span class='op'>(</span>method <span class='op'>=</span> <span class='st'>"lm"</span>, se <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>labs</a></span><span class='op'>(</span></span>
+<span>x <span class='op'>=</span> <span class='st'>"Pro Assault Rifle Scale"</span>,</span>
+<span>y <span class='op'>=</span> <span class='st'>"Pro Abortion Rights Scale"</span>,</span>
+<span>title <span class='op'>=</span> <span class='st'>"Abortion Attitudes vs Gun Control Attitudes"</span></span>
+<span><span class='op'>)</span></span></code></pre>
+</div>
+<img src="index_files/figure-html5/unnamed-chunk-2-3.png" width="624" />
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>regression</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>abortion</span> <span class='op'>~</span> <span class='va'>deathpenalty</span> <span class='op'>+</span> <span class='va'>militaryforce</span> <span class='op'>+</span> <span class='va'>guncontrol</span>, data <span class='op'>=</span> <span class='va'>dataset</span><span class='op'>)</span></span>
 <span><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='va'>regression</span><span class='op'>)</span></span></code></pre>
 </div>
 <pre><code>
 Call:
-lm(formula = abortion ~ deathpenalty + militaryforce, data = dataset)
+lm(formula = abortion ~ deathpenalty + militaryforce + guncontrol, 
+    data = dataset)
 
 Residuals:
     Min      1Q  Median      3Q     Max 
--4.9277 -1.3738  0.1069  1.7376  3.2915 
+-5.1514 -1.3343  0.4358  1.4382  3.9924 
 
 Coefficients:
               Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept)    3.03027    0.10574  28.657  &lt; 2e-16 ***
-deathpenalty   0.49355    0.02296  21.501  &lt; 2e-16 ***
-militaryforce  0.18465    0.03046   6.062 1.42e-09 ***
+(Intercept)    4.30351    0.11513  37.378  &lt; 2e-16 ***
+deathpenalty   0.33710    0.02301  14.651  &lt; 2e-16 ***
+militaryforce  0.15086    0.02924   5.159 2.56e-07 ***
+guncontrol    -0.25484    0.01092 -23.341  &lt; 2e-16 ***
 ---
 Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 
-Residual standard error: 2.039 on 6200 degrees of freedom
-Multiple R-squared:  0.08472,   Adjusted R-squared:  0.08442 
-F-statistic: 286.9 on 2 and 6200 DF,  p-value: &lt; 2.2e-16</code></pre>
+Residual standard error: 1.955 on 6199 degrees of freedom
+Multiple R-squared:  0.1587,    Adjusted R-squared:  0.1583 
+F-statistic: 389.7 on 3 and 6199 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 <p>Add description</p>
-Gun Control
+<p>Liberal-Conservative Identification</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='va'>dataset</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>guncontrol</span>, y <span class='op'>=</span> <span class='va'>abortion</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span></span>
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='co'>##id</span></span>
+<span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='va'>dataset</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>id</span>, y <span class='op'>=</span> <span class='va'>abortion</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span></span>
 <span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_jitter.html'>geom_jitter</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_smooth.html'>geom_smooth</a></span><span class='op'>(</span>method <span class='op'>=</span> <span class='st'>"lm"</span>, se <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>+</span></span>
 <span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>labs</a></span><span class='op'>(</span></span>
-<span>x <span class='op'>=</span> <span class='st'>"Anti-Assault Rifle Bans Scale"</span>,</span>
-<span>y <span class='op'>=</span> <span class='st'>"Pro-Abortion Reduction Scale"</span>,</span>
-<span>title <span class='op'>=</span> <span class='st'>"Abortion Attitudes vs Assault Rifle Attitudes"</span></span>
+<span>x <span class='op'>=</span> <span class='st'>"Conservative Identification Score"</span>,</span>
+<span>y <span class='op'>=</span> <span class='st'>"Pro Abortion Rights Scale"</span>,</span>
+<span>title <span class='op'>=</span> <span class='st'>"Abortion Attitudes vs Liberal-Conservative Identification"</span></span>
 <span><span class='op'>)</span></span></code></pre>
 </div>
 <img src="index_files/figure-html5/unnamed-chunk-3-1.png" width="624" />
 <div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>gunsregression</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>abortion</span> <span class='op'>~</span> <span class='va'>guncontrol</span>, data <span class='op'>=</span> <span class='va'>dataset</span><span class='op'>)</span></span>
-<span><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='va'>gunsregression</span><span class='op'>)</span></span></code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>idregression</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>abortion</span> <span class='op'>~</span> <span class='va'>id</span>, data <span class='op'>=</span> <span class='va'>dataset</span><span class='op'>)</span></span>
+<span><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='va'>idregression</span><span class='op'>)</span></span></code></pre>
 </div>
 <pre><code>
 Call:
-lm(formula = abortion ~ guncontrol, data = dataset)
-
-Residuals:
-    Min      1Q  Median      3Q     Max 
--4.4105 -1.4105  0.4509  1.5895  3.4509 
-
-Coefficients:
-            Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept)  5.72076    0.04242  134.85   &lt;2e-16 ***
-guncontrol  -0.31023    0.01061  -29.23   &lt;2e-16 ***
----
-Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
-
-Residual standard error: 1.998 on 6201 degrees of freedom
-Multiple R-squared:  0.1211,    Adjusted R-squared:  0.121 
-F-statistic: 854.7 on 1 and 6201 DF,  p-value: &lt; 2.2e-16</code></pre>
-</div>
-<p>Description</p>
-<p>Ideology</p>
-<div class="layout-chunk" data-layout="l-body">
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span><span class='co'>##ideology</span></span>
-<span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='va'>dataset</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>ideology</span>, y <span class='op'>=</span> <span class='va'>abortion</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span></span>
-<span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_jitter.html'>geom_jitter</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_smooth.html'>geom_smooth</a></span><span class='op'>(</span>method <span class='op'>=</span> <span class='st'>"lm"</span>, se <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>+</span></span>
-<span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>labs</a></span><span class='op'>(</span></span>
-<span>x <span class='op'>=</span> <span class='st'>"Liberal-Conservative Identification Scale"</span>,</span>
-<span>y <span class='op'>=</span> <span class='st'>"Anti-Abortion Scale"</span>,</span>
-<span>title <span class='op'>=</span> <span class='st'>"Abortion Attitudes vs Liberal-Conservative Identification"</span></span>
-<span><span class='op'>)</span></span></code></pre>
-</div>
-<img src="index_files/figure-html5/unnamed-chunk-4-1.png" width="624" />
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>ideologyregression</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>abortion</span> <span class='op'>~</span> <span class='va'>ideology</span>, data <span class='op'>=</span> <span class='va'>dataset</span><span class='op'>)</span></span>
-<span><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='va'>ideologyregression</span><span class='op'>)</span></span></code></pre>
-</div>
-<pre><code>
-Call:
-lm(formula = abortion ~ ideology, data = dataset)
+lm(formula = abortion ~ id, data = dataset)
 
 Residuals:
     Min      1Q  Median      3Q     Max 
@@ -1738,7 +1714,7 @@ Residuals:
 Coefficients:
             Estimate Std. Error t value Pr(&gt;|t|)    
 (Intercept)  7.97936    0.05551  143.75   &lt;2e-16 ***
-ideology    -0.79826    0.01260  -63.34   &lt;2e-16 ***
+id          -0.79826    0.01260  -63.34   &lt;2e-16 ***
 ---
 Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 
@@ -1747,18 +1723,18 @@ Multiple R-squared:  0.3929,    Adjusted R-squared:  0.3928
 F-statistic:  4012 on 1 and 6201 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 <p>Description</p>
-<p>Model Summary</p>
+<p>Regression Summary</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>var_labels</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span></span>
 <span>    <span class='st'>"(Intercept)"</span> <span class='op'>=</span> <span class='st'>"Intercept"</span>,</span>
-<span>    <span class='st'>"abortion"</span> <span class='op'>=</span> <span class='st'>"Pro-Abortion Rights Score"</span>,</span>
-<span>    <span class='st'>"deathpenalty"</span> <span class='op'>=</span> <span class='st'>"Anti-Death Penalty Score"</span>,</span>
-<span>    <span class='st'>"guncontrol"</span> <span class='op'>=</span> <span class='st'>"Pro-Assault Rifle Score"</span>,</span>
-<span>    <span class='st'>"militaryforce"</span> <span class='op'>=</span> <span class='st'>"Anti-Military Force Score"</span>,</span>
-<span>    <span class='st'>"ideology"</span> <span class='op'>=</span> <span class='st'>"Liberal-Conservative Score"</span></span>
+<span>    <span class='st'>"abortion"</span> <span class='op'>=</span> <span class='st'>"Pro Abortion Rights Score"</span>,</span>
+<span>    <span class='st'>"deathpenalty"</span> <span class='op'>=</span> <span class='st'>"Anti Death Penalty Score"</span>,</span>
+<span>    <span class='st'>"guncontrol"</span> <span class='op'>=</span> <span class='st'>"Pro Assault Rifle Score"</span>,</span>
+<span>    <span class='st'>"militaryforce"</span> <span class='op'>=</span> <span class='st'>"Anti Military Force Score"</span>,</span>
+<span>    <span class='st'>"id"</span> <span class='op'>=</span> <span class='st'>"Conservative Identification Score"</span></span>
 <span>  <span class='op'>)</span></span>
-<span><span class='fu'>modelsummary</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/modelsummary/man/modelsummary.html'>modelsummary</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='st'>"Death Penalty and Military Force Regression"</span> <span class='op'>=</span> <span class='va'>regression</span>, <span class='st'>"Guns Regression"</span> <span class='op'>=</span> <span class='va'>gunsregression</span>, <span class='st'>"Ideology Identification Regression"</span> <span class='op'>=</span> <span class='va'>ideologyregression</span><span class='op'>)</span>,</span>
+<span><span class='fu'>modelsummary</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/modelsummary/man/modelsummary.html'>modelsummary</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='st'>"Pro-Life Attitudes"</span> <span class='op'>=</span> <span class='va'>regression</span>, <span class='st'>"Conservative Identification"</span> <span class='op'>=</span> <span class='va'>idregression</span><span class='op'>)</span>,</span>
 <span>                           statistic <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"s.e. = {std.error}"</span>,</span>
 <span>                                         <span class='st'>"p = {p.value}"</span><span class='op'>)</span>,</span>
 <span>                           coef_map <span class='op'>=</span> <span class='va'>var_labels</span>,</span>
@@ -1770,13 +1746,10 @@ F-statistic:  4012 on 1 and 6201 DF,  p-value: &lt; 2.2e-16</code></pre>
 <th style="text-align:left;">
 </th>
 <th style="text-align:center;">
-Death Penalty and Military Force Regression
+Pro-Life Attitudes
 </th>
 <th style="text-align:center;">
-Guns Regression
-</th>
-<th style="text-align:center;">
- Ideology Identification Regression
+ Conservative Identification
 </th>
 </tr>
 </thead>
@@ -1786,10 +1759,7 @@ Guns Regression
 Intercept
 </td>
 <td style="text-align:center;">
-3.030
-</td>
-<td style="text-align:center;">
-5.721
+4.304
 </td>
 <td style="text-align:center;">
 7.979
@@ -1799,10 +1769,7 @@ Intercept
 <td style="text-align:left;">
 </td>
 <td style="text-align:center;">
-s.e. = 0.106
-</td>
-<td style="text-align:center;">
-s.e. = 0.042
+s.e. = 0.115
 </td>
 <td style="text-align:center;">
 s.e. = 0.056
@@ -1817,18 +1784,13 @@ p = &lt;0.001
 <td style="text-align:center;">
 p = &lt;0.001
 </td>
-<td style="text-align:center;">
-p = &lt;0.001
-</td>
 </tr>
 <tr>
 <td style="text-align:left;">
-Anti-Death Penalty Score
+Anti Death Penalty Score
 </td>
 <td style="text-align:center;">
-0.494
-</td>
-<td style="text-align:center;">
+0.337
 </td>
 <td style="text-align:center;">
 </td>
@@ -1841,8 +1803,6 @@ s.e. = 0.023
 </td>
 <td style="text-align:center;">
 </td>
-<td style="text-align:center;">
-</td>
 </tr>
 <tr>
 <td style="text-align:left;">
@@ -1852,25 +1812,19 @@ p = &lt;0.001
 </td>
 <td style="text-align:center;">
 </td>
-<td style="text-align:center;">
-</td>
 </tr>
 <tr>
 <td style="text-align:left;">
-Pro-Assault Rifle Score
+Pro Assault Rifle Score
 </td>
 <td style="text-align:center;">
-</td>
-<td style="text-align:center;">
-−0.310
+−0.255
 </td>
 <td style="text-align:center;">
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-</td>
-<td style="text-align:center;">
 </td>
 <td style="text-align:center;">
 s.e. = 0.011
@@ -1882,6 +1836,32 @@ s.e. = 0.011
 <td style="text-align:left;">
 </td>
 <td style="text-align:center;">
+p = &lt;0.001
+</td>
+<td style="text-align:center;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Anti Military Force Score
+</td>
+<td style="text-align:center;">
+0.151
+</td>
+<td style="text-align:center;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:center;">
+s.e. = 0.029
+</td>
+<td style="text-align:center;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
 </td>
 <td style="text-align:center;">
 p = &lt;0.001
@@ -1891,43 +1871,7 @@ p = &lt;0.001
 </tr>
 <tr>
 <td style="text-align:left;">
-Anti-Military Force Score
-</td>
-<td style="text-align:center;">
-0.185
-</td>
-<td style="text-align:center;">
-</td>
-<td style="text-align:center;">
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-</td>
-<td style="text-align:center;">
-s.e. = 0.030
-</td>
-<td style="text-align:center;">
-</td>
-<td style="text-align:center;">
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-</td>
-<td style="text-align:center;">
-p = &lt;0.001
-</td>
-<td style="text-align:center;">
-</td>
-<td style="text-align:center;">
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Liberal-Conservative Score
-</td>
-<td style="text-align:center;">
+Conservative Identification Score
 </td>
 <td style="text-align:center;">
 </td>
@@ -1941,15 +1885,11 @@ Liberal-Conservative Score
 <td style="text-align:center;">
 </td>
 <td style="text-align:center;">
-</td>
-<td style="text-align:center;">
 s.e. = 0.013
 </td>
 </tr>
 <tr>
 <td style="text-align:left;box-shadow: 0px 1.5px">
-</td>
-<td style="text-align:center;box-shadow: 0px 1.5px">
 </td>
 <td style="text-align:center;box-shadow: 0px 1.5px">
 </td>
@@ -1967,19 +1907,13 @@ Num.Obs.
 <td style="text-align:center;">
 6203
 </td>
-<td style="text-align:center;">
-6203
-</td>
 </tr>
 <tr>
 <td style="text-align:left;">
 R2
 </td>
 <td style="text-align:center;">
-0.085
-</td>
-<td style="text-align:center;">
-0.121
+0.159
 </td>
 <td style="text-align:center;">
 0.393
@@ -1990,10 +1924,7 @@ R2
 R2 Adj.
 </td>
 <td style="text-align:center;">
-0.084
-</td>
-<td style="text-align:center;">
-0.121
+0.158
 </td>
 <td style="text-align:center;">
 0.393
@@ -2004,8 +1935,8 @@ R2 Adj.
 </div>
 <p>2-3 paragraphs of description and interpretation of the plots and regression (including interpreting the main coefficient of interest and describing if it is statistically significant and if we should interpret it causally). This section could be longer if you choose to include additional analyses.</p>
 <h2 id="conclusion">Conclusion</h2>
-<p>Each of the explanatory variables we tested showed extremely statistically significant correlations with abortion attitudes. As I hypothesized, each case, the “pro-life” attitude on each topic (pro-banning of assault rifles, anti-death penalty, anti-use of military force) as inversely associated with a “pro-life” abortion attitude (anti-abortion). Further, pro-life abortion attitudes were strongly correlated with high levels of conservatism, as expected. This study provides significant evidence to support the hypothesis that the anti-abortion “pro-life” argument is not a true internal value, but could be simply political propaganda and rhetoric. However, there are still limitations to this inference. Treating likert-scale results as a continuous variable and running a linear regression on them is not the most precise or ideal, and if we learned how to run other forms of regression and more statistical tests in this class, those may have been better to be used. Further, individuals may have pro-life values but multiple competing values that arise in these cases of the death penalty (in this case, the person being killed has already committed heinous crimes), use of international military force (in this case, there may be threat to the individual’s life themselves), and gun control (in this case, there is the frequently discussed competing constitutional right to bear arms of the second amendment). So, it may not be that being “pro-life” is solely abortion rhetoric, but that in other cases, other values end up being weighed as more important. Lastly, extrapolating data from one survey with only a few questions asked about each of these issues can make it hard to gain actual perspective on the attitudes of respondents. Issues like question framing may create biases in our results. With more time and money, ideally, surveys would dive deep into each of these issues, asking similar questions in multiple different forms and asking specific nuanced questions that help tease out the underlying reasoning behind each of their attitudes. Overall, though, this study provides a great evidence for continued research on this topic.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<p>Each of the explanatory variables we tested showed extremely statistically significant correlations with abortion attitudes. As I hypothesized, each case, the “pro-life” attitude on each topic (pro banning of assault rifles, anti-death penalty, anti-use of military force) as inversely associated with a “pro-life” abortion attitude (anti abortion). Further, pro-life abortion attitudes were strongly correlated with high levels of conservatism, as expected. This study provides significant evidence to support the hypothesis that the anti-abortion “pro-life” argument is not a true internal value, but could be simply political propaganda and rhetoric. However, there are still limitations to this inference. Treating likert-scale results as a continuous variable and running a linear regression on them is not the most precise or ideal, and if we learned how to run other forms of regression and more statistical tests in this class, those may have been better to be used. Further, individuals may have pro-life values but multiple competing values that arise in these cases of the death penalty (in this case, the person being killed has already committed heinous crimes), use of international military force (in this case, there may be threat to the individual’s life themselves), and gun control (in this case, there is the frequently discussed competing constitutional right to bear arms of the second amendment). So, it may not be that being “pro-life” is solely abortion rhetoric, but that in other cases, other values end up being weighed as more important. Lastly, extrapolating data from one survey with only a few questions asked about each of these issues can make it hard to gain actual perspective on the attitudes of respondents. Issues like question framing may create biases in our results. With more time and money, ideally, surveys would dive deep into each of these issues, asking similar questions in multiple different forms and asking specific nuanced questions that help tease out the underlying reasoning behind each of their attitudes. Overall, though, this study provides a great evidence for continued research on this topic.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
 </div>
