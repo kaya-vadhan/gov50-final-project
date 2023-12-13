@@ -141,7 +141,6 @@ title = "Abortion Attitudes vs Gun Control Attitudes"
 regression <- lm(abortion ~ deathpenalty + militaryforce + guncontrol, data = dataset)
 summary(regression)
 ```
-Add description
 
 
 Liberal-Conservative Identification
@@ -158,7 +157,7 @@ title = "Abortion Attitudes vs Liberal-Conservative Identification"
 idregression <- lm(abortion ~ id, data = dataset)
 summary(idregression)
 ```
-Description
+
 
 Regression Summary
 
